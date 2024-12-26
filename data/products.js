@@ -656,5 +656,35 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "bc2847e9-5323-403f-b7c8-57fde044a9551",
+    image: "images/products/backpack.jpg",
+    name: "Sporty Black Backpack",
+    rating: {
+      stars: 4,
+      count: 2341
+    },
+    priceCents: 4530,
+    keywords: [
+      "backpack",
+      "acessories",
+      "storage",
+      "school"
+    ]
+  },
+  {
+    id: "77a845b1-16ed-43ac-2df9-5b591882113d",
+    image: "images/products/umbrella.jpg",
+    name: "All-Terrain Large Green Umbrella",
+    rating: {
+      stars: 4.5,
+      count: 1234
+    },
+    priceCents: 2499,
+    keywords: [
+      "umbrella",
+      "rainwear"
+    ]
   }
 ];
