@@ -60,7 +60,7 @@ export function renderPaymentSummary () {
     paymentSummaryElement.innerHTML = paymentSummaryHTML;
     updateCheckoutCount();
 }
-export function updateCheckoutCount() {
+function updateCheckoutCount() {
     const cartQuantity = getCartQuantity();
     const amountElment = document.querySelector('.js-checkout-amount');
     amountElment.innerHTML = `${cartQuantity} items`;
