@@ -212,7 +212,7 @@ function handleDeliveryOption() {
       deliveryOption.addEventListener('click', () => {
           const {productId, deliveryOptionId} = deliveryOption.dataset;
           updateDeliveryOption(productId, deliveryOptionId);
-          console.log(productId, deliveryOptionId);
+          initializeCheckoutPage();
 
       })
   });
