@@ -58,3 +58,13 @@ export function setProductQuantity(productId, quantity) {
     product.quantity = Number(quantity);
     saveToStorage();
 }
+export function updateDeliveryOption(productId, deliveryOptionId) {
+    let matchingProduct = '';
+    cart.forEach((cartProduct) => {
+        if (productId === cartProduct.productId) {
+            matchingProduct = cartProduct;
+        }
+    });
+    matchingProduct.deliveryOptionId = deliveryOptionId;
+    saveToStorage();
+}
