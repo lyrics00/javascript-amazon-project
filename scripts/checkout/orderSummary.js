@@ -3,6 +3,7 @@ import { products } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import {getDeliveryOption, deliveryOptions} from "../../data/deliveryOptions.js";
+import { updateCheckoutCount } from "./paymentSummary.js";
 
 
 
@@ -110,12 +111,7 @@ function renderCheckoutCart() {
     cart.forEach((cartItem) => {
       //finding product in product array
         const productId = cartItem.productId;
-        let matchingProduct;
-        products.forEach((product) => {
-            if (product.id === productId) {
-                matchingProduct = product;
-            }
-        });
+        const matchingProduct = findProduct(productId);
         const dateString = getDateString(cartItem);
 
         cartItemHTML += `
@@ -163,16 +159,8 @@ function renderCheckoutCart() {
 
     });
     document.querySelector('.js-order-summary').innerHTML = cartItemHTML;
-    updateCheckoutCount();
 }
 
-function updateCheckoutCount() {
-    const cartQuantity = getCartQuantity();
-    const amountElment = document.querySelector('.js-checkout-amount');
-    amountElment.innerHTML = `${cartQuantity} items`;
-    const itemSummaryElement = document.querySelector('.js-payment-summary-item-count');
-    itemSummaryElement.innerHTML = `Items (${cartQuantity}):`;
-}
 function deliveryOptionsHTML(cartItem) {
     let deliveryHTML = '';
     deliveryOptions.forEach((deliveryOption) => {
@@ -221,4 +209,13 @@ function getDateString(cartItem) {
   const today = dayjs();
   const dateString = today.add(deliveryOption.deliveryDays, 'days').format("dddd, MMMM D");
   return dateString;
+}
+export function findProduct(productId) {
+    let matchingProduct;
+    products.forEach((product) => {
+        if (product.id === productId) {
+            matchingProduct = product;
+        }
+    });
+    return matchingProduct;
 }
