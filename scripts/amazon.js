@@ -1,23 +1,3 @@
-const products = [{
-    image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-    name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-    rating: {
-      stars: 4.5,
-      count: 87
-    },
-    priceCents: 1090,
-},
-{
-    image: "images/products/intermediate-composite-basketball.jpg",
-    name: "Intermediate Size Basketball",
-    rating: {
-      stars: 4,
-      count: 127
-    },
-    priceCents: 2095,
-  }
-]
-renderProducts();
 
 function renderProducts() {
     const productContainer = document.querySelector('.js-products-grid')
@@ -68,11 +48,34 @@ function renderProducts() {
             Added
             </div>
 
-            <button class="add-to-cart-button button-primary">
+            <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">
             Add to Cart
             </button>
-        </div>`
-        console.log(productsHTML);
+        </div>` 
     });
     productContainer.innerHTML = productsHTML;
 }
+
+renderProducts();
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+    button.addEventListener('click', () => {
+        const productId = button.dataset.productId;
+        let matchingProduct;
+        cart.forEach((product) => {
+            if(productId === product.productId) {
+                matchingProduct = product;
+
+            }
+        });
+        if(matchingProduct) {
+            matchingProduct.quantity += 1;
+        } 
+        else {
+            cart.push({
+                productId: productId,
+                quantity: 1
+            });
+        }
+        console.log(cart);
+    });
+});
