@@ -89,7 +89,9 @@ function renderCheckoutCart() {
         const dateString = getDateString(cartItem);
 
         cartItemHTML += `
-    <div class="cart-item-container js-cart-item-container-${productId}">
+    <div class="cart-item-container 
+      js-cart-item-container
+      js-cart-item-container-${productId}">
             <div class="delivery-date">
               Delivery date: ${dateString}
             </div>
@@ -105,7 +107,7 @@ function renderCheckoutCart() {
                 <div class="product-price">
                 $${formatCurrency(matchingProduct.priceCents)}
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity js-product-quantity-${productId}">
                   <span>
                     Quantity: <span class="quantity-label js-quantity-label-product-${productId}">${cartItem.quantity}</span>
                   </span>
@@ -114,7 +116,7 @@ function renderCheckoutCart() {
                   </span>
                   <input class="quantity-input js-quantity-input js-quantity-input-product-${productId} display-false" data-product-id="${productId}">
                   <span class="save-quantity-link js-save-quantity-link link-primary js-save-quantity-product-${productId} display-false" data-product-id="${productId}">Save</span>
-                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${productId}">
+                  <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${productId}" data-product-id="${productId}">
                     Delete
                   </span>
                 </div>
