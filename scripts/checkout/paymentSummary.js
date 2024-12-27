@@ -3,7 +3,6 @@ import { findProduct } from "./orderSummary.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import formatCurrency from "../utils/money.js";
 export function renderPaymentSummary () {
-    console.log('payment summary');
     let itemCost = 0;
     let shippingCost = 0;
     cart.forEach((cartItem) => {
@@ -13,9 +12,7 @@ export function renderPaymentSummary () {
         const deliveryOptionId = cartItem.deliveryOptionId;
         const deliveryOption = getDeliveryOption(deliveryOptionId);
         shippingCost += deliveryOption.priceCents;
-    })
-    console.log(itemCost);
-    console.log(shippingCost);
+    });
     const totalBeforeTaxCents = itemCost + shippingCost;
     const taxCents = totalBeforeTaxCents * 0.1;
     const totalCents = totalBeforeTaxCents + taxCents;
@@ -56,7 +53,6 @@ export function renderPaymentSummary () {
     
     `;
     const paymentSummaryElement = document.querySelector('.js-payment-summary');
-    console.log(paymentSummaryElement);
     paymentSummaryElement.innerHTML = paymentSummaryHTML;
     updateCheckoutCount();
 }

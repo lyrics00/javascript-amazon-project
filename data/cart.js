@@ -52,8 +52,6 @@ export function getCartQuantity() {
     return cartQuantity
 }
 export function setProductQuantity(productId, quantity) {
-    console.log(productId);
-    console.log(cart);
     const product = cart.find((item) => item.productId === productId);
     product.quantity = Number(quantity);
     saveToStorage();

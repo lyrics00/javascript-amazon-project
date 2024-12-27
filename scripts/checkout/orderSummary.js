@@ -17,8 +17,7 @@ function handleDelete() {
         link.addEventListener('click', () => {
             const productId = link.dataset.productId;
             removeFromCart(productId);
-            const container = document.querySelector(`.js-cart-item-container-${productId}`);
-            container.remove();
+            renderOrderSummary();
             renderPaymentSummary();
         });
     });
@@ -40,13 +39,11 @@ function handleUpdate() {
     document.querySelectorAll('.js-quantity-input').forEach((input) => {
     
         input.addEventListener('keydown', (event) => {
-            console.log(event.key);
             if(event.key === 'Enter') {
                 //executeSave
                 let quantityValid = true;
                 const productId = input.dataset.productId;
-                const inputElement = document.querySelector(`.js-quantity-input-product-${productId}`);
-                console.log(inputElement.value);
+                const inputElement = document.querySelector(`.js-quantity-input-product-${productId}`);;
                 const quantity = inputElement.value;
                 if(quantity <= 0 || quantity >= 1000) {
                     quantityValid = false;
@@ -54,15 +51,7 @@ function handleUpdate() {
                 if (quantityValid) {
                     inputElement.value = '';
                     setProductQuantity(productId, quantity);
-                    const saveElement = document.querySelector(`.js-save-quantity-product-${productId}`);
-                    const updateElement = document.querySelector(`.js-update-quantity-product-${productId}`);
-                    saveElement.classList.add('display-false');
-                    inputElement.classList.add('display-false');
-                    updateElement.classList.remove('display-false');
-                    console.log(cart);
-                
-                    const quantityElement = document.querySelector(`.js-quantity-label-product-${productId}`);
-                    quantityElement.innerHTML = quantity;
+                    renderOrderSummary();
                     renderPaymentSummary();
                 }
             }
@@ -77,7 +66,6 @@ function handleSave() {
             let quantityValid = true;
             const productId = link.dataset.productId;
             const inputElement = document.querySelector(`.js-quantity-input-product-${productId}`);
-            console.log(inputElement.value);
             const quantity = inputElement.value;
             if(quantity <= 0 || quantity >= 1000) {
                 quantityValid = false;
@@ -85,15 +73,7 @@ function handleSave() {
             if (quantityValid) {
                 inputElement.value = '';
                 setProductQuantity(productId, quantity);
-                const saveElement = document.querySelector(`.js-save-quantity-product-${productId}`);
-                const updateElement = document.querySelector(`.js-update-quantity-product-${productId}`);
-                saveElement.classList.add('display-false');
-                inputElement.classList.add('display-false');
-                updateElement.classList.remove('display-false');
-                console.log(cart);
-            
-                const quantityElement = document.querySelector(`.js-quantity-label-product-${productId}`);
-                quantityElement.innerHTML = quantity;
+                renderOrderSummary();
                 renderPaymentSummary();
             }
         });
