@@ -1,5 +1,5 @@
 import { products } from '../data/products.js';
-import { cart, AddToCart, getCartQuantity } from '../data/cart.js';
+import { cart, AddToCart, getCartQuantity, findProduct} from '../data/cart.js';
 import { formatCurrency } from './utils/money.js';
 
 function renderProducts() {
@@ -89,7 +89,9 @@ renderProducts();
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click', () => {
         const productId = button.dataset.productId;
-        AddToCart(productId);
+        let selectorElement = document.querySelector(`.js-product-quantity-selector-${productId}`);
+        const quantity = Number(selectorElement.value);
+        AddToCart(productId, quantity);
         updateCartQuantity();
         handleAddedNotification(productId);
     });
