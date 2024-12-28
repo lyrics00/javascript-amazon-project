@@ -1,9 +1,10 @@
-import { cart, getCartQuantity, removeFromCart, setProductQuantity, updateDeliveryOption} from "../../data/cart.js"
 import { products } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import {getDeliveryOption, deliveryOptions} from "../../data/deliveryOptions.js";
+import {deliveryOptions, getDeliveryOption} from "../../data/deliveryOptions.js";
 import {renderPaymentSummary } from "./paymentSummary.js";
+import {cart} from "../../data/cart-class.js";
+
 
 export function renderOrderSummary() {
     renderCheckoutCart();
@@ -16,7 +17,7 @@ function handleDelete() {
     document.querySelectorAll('.js-delete-link').forEach((link) => {
         link.addEventListener('click', () => {
             const productId = link.dataset.productId;
-            removeFromCart(productId);
+            cart.removeFromCart(productId);
             renderOrderSummary();
             renderPaymentSummary();
         });
@@ -50,7 +51,7 @@ function handleUpdate() {
                 }
                 if (quantityValid) {
                     inputElement.value = '';
-                    setProductQuantity(productId, quantity);
+                    cart.setProductQuantity(productId, quantity);
                     renderOrderSummary();
                     renderPaymentSummary();
                 }
@@ -72,7 +73,7 @@ function handleSave() {
             }
             if (quantityValid) {
                 inputElement.value = '';
-                setProductQuantity(productId, quantity);
+                cart.setProductQuantity(productId, quantity);
                 renderOrderSummary();
                 renderPaymentSummary();
             }
@@ -82,7 +83,7 @@ function handleSave() {
 
 function renderCheckoutCart() {
     let cartItemHTML = '';
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
       //finding product in product array
         const productId = cartItem.productId;
         const matchingProduct = findProduct(productId);
@@ -170,7 +171,7 @@ function handleDeliveryOption() {
   document.querySelectorAll('.js-delivery-option').forEach((deliveryOption) => {
       deliveryOption.addEventListener('click', () => {
           const {productId, deliveryOptionId} = deliveryOption.dataset;
-          updateDeliveryOption(productId, deliveryOptionId);
+          cart.updateDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary();
           renderPaymentSummary();
 

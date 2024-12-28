@@ -1,11 +1,13 @@
-import { cart, getCartQuantity } from "../../data/cart.js";
+import {cart} from "../../data/cart-class.js";
 import { findProduct } from "./orderSummary.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import formatCurrency from "../utils/money.js";
+
+
 export function renderPaymentSummary () {
     let itemCost = 0;
     let shippingCost = 0;
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
         const matchingProduct = findProduct(cartItem.productId);
         itemCost += matchingProduct.priceCents * cartItem.quantity;
 
@@ -57,7 +59,7 @@ export function renderPaymentSummary () {
     updateCheckoutCount();
 }
 function updateCheckoutCount() {
-    const cartQuantity = getCartQuantity();
+    const cartQuantity = cart.getCartQuantity();
     const amountElment = document.querySelector('.js-checkout-amount');
     amountElment.innerHTML = `${cartQuantity} items`;
     const itemSummaryElement = document.querySelector('.js-payment-summary-item-count');

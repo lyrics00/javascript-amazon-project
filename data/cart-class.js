@@ -1,4 +1,4 @@
-class Cart {
+export class Cart {
     cartItems;
     #localStorageKey;
 
@@ -81,3 +81,6 @@ const cart_oop = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
 console.log(cart_oop);
 console.log(businessCart);
+
+
+export const cart = new Cart('cart');
