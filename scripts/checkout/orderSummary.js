@@ -11,7 +11,7 @@ export function renderOrderSummary() {
     handleDelete();
     handleUpdate();
     handleSave();
-    handleDeliveryOption();
+    handleDeliveryOption(); 
 }
 function handleDelete() {
     document.querySelectorAll('.js-delete-link').forEach((link) => {
